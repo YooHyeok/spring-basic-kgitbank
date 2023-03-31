@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Point">
+<!-- 메시지를 보낸 사람에게 포인터 점수 10점 업 -->
+<update id="pointUp" parameterType="java.util.Map">
+	update tbl_user set upoint=upoint+#{point} where uid2=#{sender}
+</update>
+</mapper>

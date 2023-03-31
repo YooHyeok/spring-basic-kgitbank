@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Admin">
+	<!-- 매퍼 네임스페이스 명 Admin설정. mybatis 에서 쿼리문을 다루는 태그를 매퍼태그라고 한다. -->
+
+	<!-- 관리자 로그인 인증 -->
+	<!-- select는 select쿼리문 insert는 insert쿼리문 update는 update쿼리문 -->
+	<select id="admin_login" parameterType="java.lang.String" resultType="admin">
+	<!-- java.lang은 기본패키지 경로로서 생략가능 -->
+	select * from admin where admin_id=#{admin_id}
+	</select>
+</mapper>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	
+	<!-- Enables the Spring MVC @Controller programming model -->
+	
+	<annotation-driven />	
+	<!-- 클래스 선언에 애노테이션(@)을 이용해서 스프링 컨트롤러를작성할 수 있게함. -->
+	
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/resources/**" location="/resources/" />
+	<!-- HTML,css,javascript,jQuery,ajax,이미지 리소스 자원이 들어가는 경로 => 이클립스 가상경로 /src/main/webapp/resources/ -->
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<!--  view resolve,jsp 기본폴더 경로가 설정되어 있다. jsp파일이 WEB_INF경로로 들어가면 해당 JSP파일이 웹브라우저에 직접 실행할 수 없다. 보안효과-->
+		<beans:property name="suffix" value=".jsp" />
+		<!-- JSP 기본 확장자가 .jsp로 설정됨. -->
+	</beans:bean>
+	
+	<context:component-scan base-package="org.zerock.controller" />
+	<!-- base-pacage 속성에 설정된 패키지 경로를 스프링에 자동 등록한다. 이 패키지 하위의 스프링 컨트롤러 클래스를 오토스캔(자동으로 찾아서)해서 인식하게 해준다.  -->
+	
+	
+</beans:beans>

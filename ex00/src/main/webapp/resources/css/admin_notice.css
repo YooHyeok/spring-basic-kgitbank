@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+/*admin_notice_write.jsp ui*/
+#aBw_wrap{
+	width:420px; height: 380px; border:1px solid red;
+	border-radius:15px;
+	margin-left: auto; margin-right: auto; /*div 좌우 중앙 정렬*/
+	margin-top: 50px; box-shadow:10px 10px 10px #ccc;/*그림자 효과*/
+
+}

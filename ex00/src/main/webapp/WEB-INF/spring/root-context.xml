@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- AOP aspectj 문법적용을 위한 자동 프록시 설정 -->
+	<aop:aspectj-autoproxy />
+	<!-- Spring JDBC -->
+	<bean id="dataSource"
+	class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	<property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
+	<property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:xe"/>
+	<property name="username" value="day"/>
+	<property name="password" value="day"/>
+	</bean>
+			
+	<!-- mybatis와 spring 연결설정,mybatis환경설정  -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<!-- setter()메서드를 통한 의존성 주입 (DI) -->
+
+		<!-- mybatis 환경설정 태그 경로 설정 -->
+		<property name="configLocation" value="classpath:/mybatis-config.xml"/>
+		<!-- classpath경로는 src/main/resources이다. mybatis-config.xml 파일 기능은 데이터 저장빈 클래스 객체명을 별칭으로 관리. -->
+		
+	<!-- 쿼리문을 담는 매퍼 xml태그위치 경로 설정 -->
+	<property name="mapperLocations" value="classpath:org/zerock/mappers/*/*.xml"/>
+	</bean>
+	
+	<!-- 트랜잭션 설정 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	<property name="dataSource" ref="dataSource"/>
+	<!-- setter() 메서드를 통한 의존성 주입 -->
+	</bean>
+	<tx:annotation-driven/>
+	<!-- 트랜잭션 설정 annotation , @Transactional 애너테이션을 이용한 트랜잭션 관리가 가능-->
+	
+	<!-- mybatis 쿼리문 수행객체 설정 -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+	<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	<!-- constructor-arg 태그는 생성자를 통한 의존성 주입 (DI)<->(디펜던시인젝션) -->
+	</bean>
+	
+	<!--  DAOImpl의 @Repository 가 설정된 부분을 스프링 에서 오토스캔(자동으로 찾아서 등록하게함.) -->
+	<context:component-scan base-package="org.zerock.dao"/>
+	
+	<!-- 비지니스 서비스 추가 목적 
+	1. 고객의 추가 요구사항을 반영하기 위해서
+	2. 컨트롤러와 모델 DAOImpl을 연결하는 중간 매개체 역할
+	3. Spring의 AOP(관련적 지향 프로그램)를 통한 트랜잭션 적용 => 데이터 일관성 유지 -->
+	<context:component-scan base-package="org.zerock.service"/>
+	
+	<aop:config></aop:config>
+	<!--  aop설정 : AOP를 어노테이션 말고 XML방식으로 설정할 때 사용 -->
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

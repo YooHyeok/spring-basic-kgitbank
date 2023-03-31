@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Board">
+
+
+	<!-- 게시판 저장 -->
+	<insert id="b_in" parameterType="org.zerock.vo.BoardVO">
+		insert into tbl_board (bno,writer,title,content,regdate)
+		values(bno_seq.nextval,#{writer},#{title},#{content},sysdate)
+		<!-- #{XX} == get(XX) -->
+		<!-- sysdate == 오라클 날짜 함수 -->
+	</insert>
+
+
+	<!-- 총 레코드 갯수 -->
+	<select id="b_count" resultType="int">
+		<!-- resultType속성은 반환타입=>생략불가 -->
+		select count(*) from tbl_board
+		<!-- count(*)함수는 총레코드 개수를 반환 -->
+	</select>
+	
+	
+	<!-- 게시판 목록 -->
+	<select id="b_list" resultType="b" parameterType="b">
+	select * from 
+	(select rowNum rNum,bno,writer,title,viewcnt,regdate,replycnt
+	from(select * from tbl_board order by bno desc))
+	<!-- 		번호값을 기준으로 내림차순 정렬 				-->   
+	where rNum &gt;= #{startrow} and rNum &lt;= #{endrow}
+	<!--  rowNum컬럼은 테이블 생성시 오라클이 기본으로 제공하는 컬럼으로 레코드 저장시 일련번호값이 저장됨. 
+			일련번호는 중복번호가 없고 1부터 시작해서 1씩 증가하는 정수숫자가 저장됨. 
+			rNum은 rowNum컬럼명의 별칭이름. 인라뷰 서브쿼리문을 사용함. 
+		*  &gt; - >=
+		*  &lt; - <=	
+	-->
+	
+	</select>
+	
+	
+	<!-- 조회수 증가 -->
+	<update id="b_hit" parameterType="int">
+	<!-- parameterType속성은 전달인자 타입으로 생략가능 -->
+	update tbl_board set viewcnt=viewcnt+1 where bno=#{bno}
+	</update>
+
+
+	<!-- 게시물 내용 -->
+	<select id="b_cont" parameterType="int" resultType="b" >
+	<!--  -->
+	select * from tbl_board where bno=#{bno}
+	</select>
+	
+	<!-- 게시물 수정 -->
+	<update id="b_edit">
+	<!-- parameterType은 생략가능 -->
+	update tbl_board set writer=#{writer},title=#{title},content=#{content} where bno=#{bno}
+	</update>
+	
+	<!-- 게시물 삭제 -->
+	<delete id="b_del">
+	delete from tbl_board where bno=#{bno} 
+	</delete>
+	
+	<!-- 댓글 갯수 증가(1),감소(-1) -->
+	<update id="updateReplyCnt" parameterType="java.util.Map">
+	update tbl_board set replycnt=replycnt+#{amount}
+	where bno=#{bno}
+	</update>
+</mapper>
+

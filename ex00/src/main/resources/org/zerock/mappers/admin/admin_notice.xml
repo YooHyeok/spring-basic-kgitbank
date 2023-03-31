@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminNotice">
+<!-- 관리자 공지 저장 -->
+<insert id="an_in" > <!-- return타입없는 void이기때문에 result타입은 없음 -->
+insert into notice (notice_no,notice_name,notice_title,notice_pwd,notice_cont,notice_date)
+values(g_no_seq.nextval, #{notice_name},#{notice_title},#{notice_pwd},#{notice_cont},sysdate)
+<!-- 순서가 바뀌면안됨. notice_pwd가 20바이트 notice_title은 200바이트 인데 두게가바뀌면 20바이트에 200바이트가 들어갈수없기떄문에 error500 sql쿼리문오류 발생. -->
+<!--  g_no_seq.nextval 다음번번호값을가져옴 -->
+</insert>
+
+</mapper>

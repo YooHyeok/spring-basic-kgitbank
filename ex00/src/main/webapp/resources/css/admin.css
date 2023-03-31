@@ -1,0 +1,102 @@
+@charset "UTF-8";
+
+/* admin_login.jsp ui태그*/
+#aLogin_wrap{
+	width:340px; /*div폭*/ height:160px;/*div높이*/
+	border:1px solid green;/*테두리 두께를 1픽셀, solid는 실선, 선색은 핑크색 = solid pink*/
+	box-shadow:20px 20px 20px #ccc; /*그림자효과*/
+	margin-left:auto; margin-right:auto;/*div좌우 수평중앙 정렬*/
+	margin-top:170px; /*div상단 바깥여백 설정*/
+	border-radius:25px; /*테두리를 둥글게*/
+}
+
+#aLogin_wrap .aLogin_title{
+	margin:20px 0 0 96px; /* 시계 방향으로 바깥 위, 오른쪽, 아래쪽, 왼쪽 바깥여백을 한꺼번에 지정 */
+	width:140px; font-size:19px; /*글자크기*/
+	background:lightgreen; border-radius:15px; /*원래 코드는 skyblue*/
+	text-align:center; /*글자를 수평 중앙정렬*/
+	padding:2px; /*상하좌우 안여백을 동시에 지정*/
+}
+
+#aLogin_t{
+	margin:20px 0px 0px 10px;
+}
+
+/*admin_main.jsp ui*/
+#aMain_wrap{
+	width:860px; height:760px; border:1px solid green; /*테두리 선 두께를 1픽셀, 실선, 선색을 파랑 = solid blue으로 설정*/
+	border-radius:15px; /*테두리를 둥글게 처리한다*/
+	box-shadow: 15px 15px 15px #ccc; /*그림자 효과*/
+	margin-left:auto; margin-right:auto;/*div수평중앙 정렬*/
+	margin-top:30px;
+}
+
+#aMain_header{
+	width:840px; height:160px; border:1px solid lightgreen;
+	border-radius:15px; margin:10px 0px 0px 10px; /*시계방향으로 바깥위, 오른쪽, 아래쪽, 바깥 왼쪽 여백을 동시에 지정*/
+}
+
+#aMain_logo{
+	width:150px; height:100px; border:1px solid green;
+	border-radius:15px; margin:10px 0px 0px 10px;
+	float:left; /*div가 가로줄 전체를 차지하는 블록요소 태그이다. 
+	이속성을 사용하면 내용물 크기만큼만 차지하는 인라인 요소 태그로 바뀐다.
+	 그러므로 복수개의 div 레이아웃이 수직정렬에서 수평정렬로 변환된다*/
+}
+
+#aMain_logo img{
+	width:120px; height:55px; margin:31px 0px 0px 14px;
+}
+#aMain_menu{
+	width:380px; height:140px; border:1px solid gray;
+	border-radius:15px; margin:10px 0px 0px 10px; float:left;
+}
+#aMain_menu ul li{
+	float:left;/*수직정렬이 수평정렬로 바뀐다.*/
+	list-style:none; /*목록앞 점없앰*/
+	margin:87px 0px 0px 0px;
+	padding:0px 5px;/*상하 안여백은 0픽셀, 좌우 안여백은 5픽셀*/
+}
+#aMain_right{
+	width:264px; height:140px; border:1px solid gray;
+	border-radius:15px; margin:10px 0px 0px 10px; float:left;
+}
+
+#aMain_right .aRight_title{
+	font-size:12px; /*글자크기*/ margin-left:10px;/*바깥 왼쪽여백 지정*/	
+}
+.clear{
+	clear:both;/*위쪽  div에 float속성이 적용되었을때 빈여백 공간이 발생하면 아래쪽 div가 위로 올라가서 UI가 깨진다.
+				이것을 막아주는 역할을 한다. 즉 div간 잘못된 css적용을 없애주는 기능을 한다. */
+}
+#aMain_cont{
+	width:840px; height:400px; border:1px solid green;/*solid red;*/ border-radius:15px;
+	margin:10px 0px 0px 10px;
+}
+#aMain_cont .aMainCont_title{
+	font-size:16px; margin:210px 0px 0px 320px; 
+}
+#aMain_footer{
+	width:840px; height:72px; border:1px solid green; /*solid red*/
+	border-radius:15px;margin:10px 0px 0px 10px;
+}
+#aMain_footer .aMainFooter_title{
+	font-size:12px; margin:27px 0px 0px 210px;
+}
+
+a:link{
+	text-decoration:none; /*하이퍼링크 된곳 밑줄선을 사라지게 함.*/
+}
+a:active{
+	text-decoration:none; /*하이퍼링크 된것 클릭하는 순간 밑줄선을 사라지게 함*/
+}
+a:visited{
+	text-decoration:none; /*하이퍼링크 된곳 한번이라도 방문한곳 밑줄선을 사라지게 함*/
+}
+a:hover{/* hover는 마우스오버시 css효과 */
+	text-decoration:underline; /*하이퍼링크 된곳 마우스오버시 밑줄선을 나오게 함*/
+}
+
+
+
+
